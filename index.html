@@ -1,10 +1,10 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Para Minha Namorada 💖</title>
   <style>
-    /* Tema escuro com toques de vermelho */
     :root {
       --bg-color: rgba(0, 0, 0, 0.9);
       --accent-color: #e63946;
@@ -13,42 +13,87 @@
       --btn-bg: #e63946;
       --btn-hover-bg: #ff6b6b;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      background: var(--bg-color) url('particles.png') center/cover no-repeat;
+      background-color: #000;
       color: var(--text-color);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       overflow-x: hidden;
+      overflow-y: auto;
+      position: relative;
     }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
     header {
       text-align: center;
       padding: 2rem 1rem;
       animation: glow 2s infinite ease-in-out;
-      position: relative;
     }
-    h1 {
-      font-size: 3rem;
-      color: var(--accent-color);
+
+    .button {
+      --border-right: 6px;
+      --text-stroke-color: rgba(255,255,255,0.6);
+      --animation-color: #e63946;
+      --fs-size: 2.5em;
+      letter-spacing: 3px;
+      text-decoration: none;
+      font-size: var(--fs-size);
+      font-family: "Arial";
       position: relative;
-      animation: glitch 1.5s infinite;
+      text-transform: uppercase;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--text-stroke-color);
+      margin-bottom: 1rem;
     }
+
+    .hover-text {
+      position: absolute;
+      box-sizing: border-box;
+      color: var(--animation-color);
+      width: 0%;
+      inset: 0;
+      border-right: var(--border-right) solid var(--animation-color);
+      overflow: hidden;
+      transition: 0.5s;
+      -webkit-text-stroke: 1px var(--animation-color);
+    }
+
+    .button:hover .hover-text {
+      width: 100%;
+      filter: drop-shadow(0 5px 23px var(--animation-color));
+    }
+
     nav ul {
       display: flex;
       justify-content: center;
       gap: 2rem;
-      margin-bottom: 1rem;
+      list-style: none;
     }
+
     nav a {
       color: var(--text-color);
       text-decoration: none;
       font-weight: bold;
-      position: relative;
-      transition: color 0.3s;
+      transition: 0.3s;
     }
+
     nav a:hover {
       color: var(--accent-color);
       text-shadow: 0 0 8px var(--accent-color);
     }
+
     section {
       padding: 4rem 2rem;
       max-width: 800px;
@@ -58,6 +103,7 @@
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(0,0,0,0.8);
     }
+
     h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
@@ -65,22 +111,25 @@
       text-align: center;
       text-shadow: 0 0 6px var(--glow-color);
     }
-    /* Grid de fotos */
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1rem;
     }
+
     .grid img {
       width: 100%;
       border-radius: 8px;
       filter: brightness(0.8);
-      transition: filter 0.3s, transform 0.3s;
+      transition: 0.3s;
     }
+
     .grid img:hover {
       filter: brightness(1);
       transform: scale(1.05);
     }
+
     .message-card {
       background: rgba(30,30,30,0.8);
       margin: 1rem 0;
@@ -89,51 +138,87 @@
       border-radius: 6px;
       backdrop-filter: blur(5px);
     }
-    /* Botão para YouTube */
-    .btn-youtube {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      font-size: 1.25rem;
-      color: #fff;
-      background: var(--btn-bg);
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #ccc;
+    }
+
+    /* Botão de envio */
+    .btn-send {
+      font-family: inherit;
+      font-size: 20px;
+      background: royalblue;
+      color: white;
+      padding: 0.7em 1em;
+      padding-left: 0.9em;
+      display: flex;
+      align-items: center;
       border: none;
-      border-radius: 50px;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.2s;
       cursor: pointer;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px var(--btn-bg);
-      animation: pulse 2s infinite;
-      transition: background 0.3s;
+      margin: auto;
+      margin-top: 2rem;
     }
-    .btn-youtube:hover {
-      background: var(--btn-hover-bg);
-      box-shadow: 0 0 20px var(--btn-hover-bg);
+
+    .btn-send span {
+      margin-left: 0.3em;
+      transition: all 0.3s ease-in-out;
     }
+
+    .btn-send svg {
+      transform-origin: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .btn-send:hover .svg-wrapper {
+      animation: fly-1 0.6s ease-in-out infinite alternate;
+    }
+
+    .btn-send:hover svg {
+      transform: translateX(1.2em) rotate(45deg) scale(1.1);
+    }
+
+    .btn-send:hover span {
+      transform: translateX(5em);
+    }
+
+    .btn-send:active {
+      transform: scale(0.95);
+    }
+
     @keyframes glow {
       from { box-shadow: 0 0 5px var(--glow-color); }
       to { box-shadow: 0 0 20px var(--accent-color); }
     }
-    @keyframes glitch {
-      0% { text-shadow: 2px 0 var(--accent-color); }
-      20% { text-shadow: -2px 0 var(--glow-color); }
-      40% { text-shadow: 2px 2px var(--accent-color); }
-      60% { text-shadow: -2px -2px var(--glow-color); }
-      80% { text-shadow: 2px -2px var(--accent-color); }
-      100% { text-shadow: -2px 2px var(--glow-color); }
+
+    @keyframes fly-1 {
+      from { transform: translateY(0.1em); }
+      to { transform: translateY(-0.1em); }
     }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
+
     @media (max-width: 600px) {
-      h1 { font-size: 2.5rem; }
-      nav ul { flex-direction: column; gap: 1rem; }
+      .button {
+        font-size: 1.5em;
+      }
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+      }
     }
   </style>
 </head>
 <body>
+  <canvas id="bg"></canvas>
+
   <header>
+    <div class="button" data-text="Para minha mulher">
+      <span class="actual-text">&nbsp;Para minha mulher&nbsp;</span>
+      <span aria-hidden="true" class="hover-text">&nbsp;Para minha mulher&nbsp;</span>
+    </div>
     <nav>
       <ul>
         <li><a href="#about">Sobre Nós</a></li>
@@ -142,32 +227,93 @@
         <li><a href="#youtube">YouTube</a></li>
       </ul>
     </nav>
-    <h1>Para a minha mulher!</h1>
-  </header>  <section id="about">
+  </header>
+
+  <section id="about">
     <h2>Sobre Nós</h2>
-    <p>Eu acho muito louco a forma de como nosso relacionamento está indo muito rápidokkkkkkk, mas por mim eu já pularia para a parte aonde nós casamos 😼.</p>
-  </section>  <section id="gallery">
-    <h2>Fotinha</h2>
+    <p>Eu acho muito louco a forma de como nosso relacionamento está indo muito rápidokkkkkkk, mas por mim eu já pularia para a parte aonde nós casamos.</p>
+  </section>
+
+  <section id="gallery">
+    <h2>Fotinhas</h2>
     <div class="grid">
-      <img src="lagoa.jpg" alt="Nós dois">
-      
-      <!-- Adicione mais fotos -->
+      <img src="lagoa.jpg" alt="Foto 1">
+      <img src="lagoa1.jpg" alt="Foto 2">
+      <img src="lagoa2.jpg" alt="Foto 3">
     </div>
-  </section>  <section id="messages">
+  </section>
+
+  <section id="messages">
     <h2>Mensagens de Amor</h2>
     <div class="message-card">
       <p>A cada dia que passa, eu me apaixono mais por você.</p>
-      <div class="message-card">
-      <p>Preciso de mais fotinhas sua meu bem🥸</p>
     </div>
-    <!-- Cartões de mensagem adicionais -->
-  </section>  <section id="youtube">
-    <h2>te dedico</h2>
+    <div class="message-card">
+      <p>Preciso de mais fotinhas suas, meu bem.</p>
+    </div>
+  </section>
+
+  <section id="youtube">
+    <h2>Te dedico</h2>
     <div style="text-align:center;">
-      <a href="https://youtu.be/nyK89xK63HI?si=HU2drKnFvmuPXgGr" target="_blank" class="btn-youtube">clique aqui ❤️</a>
+      <button class="btn-send" onclick="window.open('https://youtu.be/nyK89xK63HI?si=HU2drKnFvmuPXgGr','_blank')">
+        <div class="svg-wrapper-1">
+          <div class="svg-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+            </svg>
+          </div>
+        </div>
+        <span>clique🤓☝️</span>
+      </button>
     </div>
-  </section>  <footer>
-    <p>&copy; 2025 - Amar você para sempre é um dos meus planos favoritos, eu te amo. ❤️</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 - Amar você para sempre é um dos meus planos favoritos. Eu te amo. ❤️</p>
   </footer>
+
+  <script>
+    // Fundo animado com partículas
+    const canvas = document.getElementById("bg");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5,
+      });
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#e63946";
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      }
+      requestAnimationFrame(animateParticles);
+    }
+
+    animateParticles();
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 </html>
