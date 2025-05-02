@@ -1,81 +1,173 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html><html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiesta - Planejamento de Festas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000000; /* Preto */
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-        p {
-            font-size: 16px;
-            line-height: 1.5;
-        }
-        .cta-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #8A2BE2; /* Roxo */
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .cta-button:hover {
-            background-color: #FFA500; /* Laranja */
-        }
-        .section {
-            margin-bottom: 40px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Minha Namorada 💖</title>
+  <style>
+    /* Tema escuro com toques de vermelho */
+    :root {
+      --bg-color: rgba(0, 0, 0, 0.9);
+      --accent-color: #e63946;
+      --text-color: #f1faee;
+      --glow-color: rgba(230, 57, 70, 0.7);
+      --btn-bg: #e63946;
+      --btn-hover-bg: #ff6b6b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg-color) url('particles.png') center/cover no-repeat;
+      color: var(--text-color);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      animation: glow 2s infinite ease-in-out;
+      position: relative;
+    }
+    h1 {
+      font-size: 3rem;
+      color: var(--accent-color);
+      position: relative;
+      animation: glitch 1.5s infinite;
+    }
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--accent-color);
+      text-shadow: 0 0 8px var(--accent-color);
+    }
+    section {
+      padding: 4rem 2rem;
+      max-width: 800px;
+      margin: auto;
+      background: rgba(10,10,10,0.6);
+      margin-bottom: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--accent-color);
+      text-align: center;
+      text-shadow: 0 0 6px var(--glow-color);
+    }
+    /* Grid de fotos */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .grid img {
+      width: 100%;
+      border-radius: 8px;
+      filter: brightness(0.8);
+      transition: filter 0.3s, transform 0.3s;
+    }
+    .grid img:hover {
+      filter: brightness(1);
+      transform: scale(1.05);
+    }
+    .message-card {
+      background: rgba(30,30,30,0.8);
+      margin: 1rem 0;
+      padding: 1rem;
+      border-left: 4px solid var(--accent-color);
+      border-radius: 6px;
+      backdrop-filter: blur(5px);
+    }
+    /* Botão para YouTube */
+    .btn-youtube {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.25rem;
+      color: #fff;
+      background: var(--btn-bg);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px var(--btn-bg);
+      animation: pulse 2s infinite;
+      transition: background 0.3s;
+    }
+    .btn-youtube:hover {
+      background: var(--btn-hover-bg);
+      box-shadow: 0 0 20px var(--btn-hover-bg);
+    }
+    @keyframes glow {
+      from { box-shadow: 0 0 5px var(--glow-color); }
+      to { box-shadow: 0 0 20px var(--accent-color); }
+    }
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 var(--accent-color); }
+      20% { text-shadow: -2px 0 var(--glow-color); }
+      40% { text-shadow: 2px 2px var(--accent-color); }
+      60% { text-shadow: -2px -2px var(--glow-color); }
+      80% { text-shadow: 2px -2px var(--accent-color); }
+      100% { text-shadow: -2px 2px var(--glow-color); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 2.5rem; }
+      nav ul { flex-direction: column; gap: 1rem; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-      <p> <h1> <span style="color: purple;">Bem-vindo ao  </span> 𝓕𝓲𝓮𝓼𝓽𝓪 ⭑ </h1> </p>
-        <p>Seja bem-vindo à revolução das festas com o Fiesta! Nosso aplicativo é a solução completa para planejar, organizar e curtir eventos memoráveis sem o estresse habitual. Com uma interface intuitiva e recursos inovadores, estamos aqui para transformar suas celebrações em momentos inesquecíveis.</p>
-        <a href= "https://youtu.be/QHeqAfkraxk?si=hHwk6KjGx9BAtdgG" class="cta-button">Comece agora</a>
-
-        <div class="section">
-          <p>  <h2><span style="color: purple;"> Sobre Nós </span> </h2> </p>
-            <p> Somos uma equipe apaixonada por festas e eventos, dedicada a transformar cada celebração em uma experiência inesquecível. Nosso objetivo é garantir que cada momento seja memorável e livre</p>
-        </div>
-
-        <div class="section">
-          <p> <h2> <span style="color: purple;"> Nossos Clientes</span> </h2></p>
-           
-            <p>Os clientes do Fiesta vão desde indivíduos que planejam festas pessoais até empresas que planejam eventos corporativos. A simplicidade, a centralização e a personalização do processo de planejamento são suas principais necessidades. Por outro lado, seus desejos incluem uma experiência integrada, apoio contínuo e inspiração criativa. O Fiesta pode se tornar a ferramenta perfeita para qualquer tipo de evento ao atender a essas necessidades e desejos. </p>
-        </div>
-
-        <div class="section">
-          <p> <h2> <span style="color: purple;"> Como obteremos retorno </span> </h2> </p>
-          <p> <h4> <span style="color: pink;"> •Taxas de Serviço e Transaçao:</span> </h4> </p>
-            <p>Cobrar uma pequena taxa por cada transação realizada na plataforma, como a venda de ingressos, contratação de fornecedores, ou reserva de locais. </p>
-          <p> <h4> <span style="color: pink;"> Exemplos:</span></h4> <p> Uma taxa de 5% a 15% sobre o valor de cada transação.</p></p>
-        </div>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#about">Sobre Nós</a></li>
+        <li><a href="#gallery">Galeria</a></li>
+        <li><a href="#messages">Mensagens</a></li>
+        <li><a href="#youtube">YouTube</a></li>
+      </ul>
+    </nav>
+    <h1>Para a minha mulher!</h1>
+  </header>  <section id="about">
+    <h2>Sobre Nós</h2>
+    <p>Eu acho muito louco a forma de como nosso relacionamento está indo muito rápidokkkkkkk, mas por mim eu já pularia para a parte aonde nós casamos 😼.</p>
+  </section>  <section id="gallery">
+    <h2>Fotinha</h2>
+    <div class="grid">
+      <img src="meu amorzinho.jpg" alt="Nós dois">
+      
+      <!-- Adicione mais fotos -->
     </div>
-  
-  <div class="section"> 
-    <h3> FIM!</h3>
-    <P>OBRIGADO A TODOS🤓☝️</P>
-  </div>
-  <img src="chora.gif" alt="pâo com ovo">
-
-  <div class="footer">
-    <h4>  <p>© 2024 Fiesta! Todos os direitos reservados. </p></h4>
-</div>
+  </section>  <section id="messages">
+    <h2>Mensagens de Amor</h2>
+    <div class="message-card">
+      <p>A cada dia que passa, eu me apaixono mais por você.</p>
+      <div class="message-card">
+      <p>Preciso de mais fotinhas sua meu bem🥸</p>
+    </div>
+    <!-- Cartões de mensagem adicionais -->
+  </section>  <section id="youtube">
+    <h2>te dedico</h2>
+    <div style="text-align:center;">
+      <a href="https://youtu.be/nyK89xK63HI?si=HU2drKnFvmuPXgGr" target="_blank" class="btn-youtube">clique aqui ❤️</a>
+    </div>
+  </section>  <footer>
+    <p>&copy; 2025 - Amar você para sempre é um dos meus planos favoritos, eu te amo. ❤️</p>
+  </footer>
 </body>
 </html>
