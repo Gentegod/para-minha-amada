@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para Minha Namorada 💖</title>
+  <style>
+    :root {
+      --bg-color: #0b0b0b;
+      --card-bg: #161616;
+      --accent-color: #a855f7;
+      --text-color: #ffffff;
+      --glow-color: rgba(168, 85, 247, 0.4);
+      --btn-gradient: linear-gradient(90deg, #7c3aed, #a855f7);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    canvas { position: fixed; top: 0; left: 0; z-index: -1; }
+
+    header { text-align: center; padding: 4rem 1rem; }
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      text-shadow: 0 0 15px var(--glow-color);
+      letter-spacing: 2px;
+    }
+
+    section {
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: var(--card-bg);
+      border: 1px solid #2a2a2a;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    h2 { color: var(--accent-color); text-align: center; margin-bottom: 1.5rem; }
+
+    .timer-display {
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-align: center;
+      background: var(--btn-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 10px var(--glow-color));
+    }
+
+    /* GRID DE 10 FOTOS */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .grid img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #333;
+      image-rendering: pixelated; 
+      transition: 0.4s;
+    }
+
+    .grid img:hover {
+      transform: scale(1.05);
+      border-color: var(--accent-color);
+      box-shadow: 0 0 15px var(--glow-color);
+    }
+
+    /* FORMULÁRIO */
+    #form-container { transition: all 0.5s ease; }
+    textarea {
+      width: 100%; height: 120px;
+      background: #0b0b0b; border: 1px solid #333;
+      border-radius: 12px; padding: 15px; color: white;
+      font-family: inherit; resize: none; margin-bottom: 15px;
+    }
+    textarea:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 15px var(--glow-color); }
+    
+    .btn-submit {
+      width: 100%; background: var(--btn-gradient);
+      color: white; padding: 1rem; border: none;
+      border-radius: 50px; font-weight: bold; cursor: pointer;
+      transition: 0.3s; box-shadow: 0 5px 15px var(--glow-color);
+    }
+
+    #success-message { display: none; text-align: center; padding: 20px; }
+    .pixel-heart { font-size: 50px; animation: heartbeat 1.2s infinite; display: block; }
+    @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+
+    footer { text-align: center; padding: 3rem; color: #666; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <canvas id="bg"></canvas>
+
+  <header>
+    <h1 class="hero-title">Para Minha Mulher</h1>
+  </header>
+
+  <section id="timer">
+    <h2>Nosso Tempo Juntos</h2>
+    <div id="counter" class="timer-display">Carregando...</div>
+    <p style="text-align: center; color: #888; margin-top: 10px;">Desde 25/05/2025 💜</p>
+  </section>
+
+  <section id="gallery">
+    <h2>Nossas Memórias 📸</h2>
+    <div class="grid">
+      <img src="amo1.jpg" alt="Foto 1">
+      <img src="amo2.jpg" alt="Foto 2">
+      <img src="amo3.jpg" alt="Foto 3">
+      <img src="amo4.jpg" alt="Foto 4">
+      <img src="amo5.jpg" alt="Foto 5">
+      <img src="amo6.jpg" alt="Foto 6">
+      <img src="amo7.jpg" alt="Foto 7">
+      <img src="amo8.jpg" alt="Foto 8">
+      <img src="amo9.jpg" alt="Foto 9">
+      <img src="amo10.jpg" alt="Foto 10">
+    </div>
+  </section>
+
+  <section id="write-to-me">
+    <h2>Escreva para mim 💜</h2>
+    <div id="form-container">
+      <form id="my-form" action="https://formspree.io/f/mojndlgz" method="POST" style="display: flex; flex-direction: column;">
+        <textarea name="mensagem" placeholder="Diga algo fofo aqui..." required></textarea>
+        <button type="submit" class="btn-submit">Enviar para o meu amor</button>
+      </form>
+    </div>
+
+    <div id="success-message">
+      <span class="pixel-heart">💜</span>
+      <p style="font-size: 1.2rem; color: var(--accent-color); font-weight: bold;">Mensagem enviada!</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 - Amar você para sempre é o meu plano favorito.</p>
+  </footer>
+
+  <script>
+    // Data: 25 de Maio de 2025 (Mês 4 no JS)
+    const startDate = new Date(2025, 4, 25, 0, 0, 0); 
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = now - startDate;
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / 1000 / 60) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+      document.getElementById('counter').innerText = `${d}d ${h}h ${m}m ${s}s`;
+    }
+    setInterval(updateTimer, 1000); updateTimer();
+
+    const form = document.getElementById("my-form");
+    const formContainer = document.getElementById("form-container");
+    const successMessage = document.getElementById("success-message");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const response = await fetch(e.target.action, {
+        method: 'POST',
+        body: new FormData(e.target),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        formContainer.style.display = "none";
+        successMessage.style.display = "block";
+      }
+    });
+
+    const canvas = document.getElementById("bg");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    function init() {
+      canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+      particles = [];
+      for (let i = 0; i < 80; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 2,
+          dx: (Math.random() - 0.5) * 0.7, dy: (Math.random() - 0.5) * 0.7
+        });
+      }
+    }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#a855f7";
+      particles.forEach(p => {
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill();
+        p.x += p.dx; p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(animate);
+    }
+    window.addEventListener("resize", init); init(); animate();
+  </script>
+</body>
+</html>
