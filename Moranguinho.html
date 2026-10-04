@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para moranguinho</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f172a;
+      color: #1e3a5f;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* CANVAS DAS PARTÍCULAS */
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 20px auto;
+      background: rgba(240, 249, 255, 0.93);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(14, 165, 233, 0.2);
+      backdrop-filter: blur(6px);
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 32px;
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      background: #0ea5e9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #0369a1;
+      font-weight: 500;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #0ea5e9;
+    }
+
+    .phone {
+      color: #0c4a6e;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .phone span {
+      display: block;
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 400;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 380px;
+      background: #bae6fd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(14,165,233,0.25), rgba(15,23,42,0.55));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-overlay p {
+      font-size: 18px;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .hero-overlay h1 {
+      font-size: 52px;
+      font-weight: 700;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    /* MAIN */
+    .main {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 24px;
+      padding: 32px;
+    }
+
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 4px 15px rgba(14, 165, 233, 0.08);
+    }
+
+    .card h2 {
+      font-size: 20px;
+      color: #0369a1;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    /* NEWS / DIREITA */
+    .news h2 {
+      font-size: 20px;
+      color: #0369a1;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .news-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 22px;
+      align-items: flex-start;
+    }
+
+    .news-item img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 14px;
+      flex-shrink: 0;
+    }
+
+    .news-item p {
+      font-size: 14.5px;
+      color: #475569;
+      line-height: 1.55;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 768px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      nav {
+        gap: 18px;
+      }
+
+      .hero-overlay h1 {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CANVAS DAS PARTÍCULAS -->
+  <canvas id="particles"></canvas>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <header>
+      <div class="logo">♥</div>
+      <nav>
+        <a href="#">você</a>
+        <a href="#">nós</a>
+        <a href="#">sentimento</a>
+      </nav>
+      <div class="phone">
+        SÓ VOCÊ
+        <span>no meu pensamento</span>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <img src="foto1.jpg" alt="Você">
+      <div class="hero-overlay">
+        <p>para a minha moranguinho</p>
+        <h1>EU GOSTO DE VOCÊ</h1>
+      </div>
+    </section>
+
+    <!-- CONTEÚDO -->
+    <div class="main">
+      <div class="left-column">
+
+        <div class="card">
+          <h2>você</h2>
+          <img src="foto2.jpg" alt="Você">
+          <p>
+            Eu gosto muito de você.<br>
+            Do seu jeito, do seu olhar e de como me sinto quando estou perto.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>nós</h2>
+          <img src="foto3.jpg" alt="Você">
+          <p>
+            Gosto dos nossos momentos,<br>
+            dos beijos e do silêncio gostoso que existe entre a gente.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- DIREITA -->
+      <div class="card news">
+        <h2>o que eu sinto</h2>
+
+        <div class="news-item">
+          <img src="foto4.jpg" alt="Você">
+          <p>
+            Ainda não te pedi em namoro,  
+            mas queria que você soubesse de verdade o que passa aqui dentro.
+          </p>
+        </div>
+
+        <div class="news-item">
+          <img src="foto1.jpg" alt="Você">
+          <p>
+            Estou gostando tanto de você...<br>
+            Amo o seu sorriso, a sua personalidade e tudo de lindo que existe em você.<br><br>
+            Eu te amo.<br>
+            De verdade.<br><br>
+            Quero construir algo bonito ao seu lado e espero, do fundo do coração, que esse sentimento seja recíproco.
+          </p>
+        </div>
+
+        <div class="news-item">
+          <img src="foto3.jpg" alt="Você">
+          <p>
+            Com todo carinho,<br>
+            <strong style="color: #0ea5e9;">kaká</strong>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    let particles = [];
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2.5 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.speedY = (Math.random() - 0.5) * 0.8;
+        this.color = 'rgba(14, 165, 233, 0.75)'; // só azul
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > width) this.speedX *= -1;
+        if (this.y < 0 || this.y > height) this.speedY *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      particles = [];
+      const quantidade = Math.floor((width * height) / 9000);
+      for (let i = 0; i < quantidade; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+
+        for (let j = i; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 120) {
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(14, 165, 233, 0.13)';
+            ctx.lineWidth = 0.6;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+  </script>
+</body>
+</html>
